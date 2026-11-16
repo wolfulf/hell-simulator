@@ -9,7 +9,7 @@ A 3D browser game that simulates the hell from Steven L. Peck's novella *A Short
 
 Controls: WASD to walk, Shift to run, mouse to look, E to interact, Space to jump, Tab for finds, H for the rules, M to mute. English by default, German available on the start sign.
 
-This is an unofficial fan project and is not affiliated with the author or publisher of the novella.
+This is an unofficial, non-commercial fan project inspired by the novella. It is not affiliated with or endorsed by the author or the publisher, and it contains no text from the book. All rights to the novella remain with their owners.
 
 ## Credits
 

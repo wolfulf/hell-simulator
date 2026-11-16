@@ -4,6 +4,7 @@ window.TEXTE = {
   en: {
     titel: 'Hell Simulator', punkt: ',',
     tafel: `<h1>Welcome to Hell</h1>
+  <div style="margin:-4px 0 14px;padding:8px 12px;font-size:14px;line-height:1.45;border-left:3px solid #c9a45c;background:#1f1a14">An unofficial, non-commercial fan project inspired by the novella <i>A Short Stay in Hell</i> by Steven L. Peck. It tries to simulate the hell described there: the same library, at its full size. Not affiliated with or endorsed by the author or the publisher. It contains no text from the book; all rights to the novella remain with their owners.</div>
   <div>This is the Library. It holds every book that can be written on 410 pages of 40 lines with 80 characters each. One of them tells the story of your life.</div>
   <h2>The rules</h2>
   <ol>
@@ -20,7 +21,6 @@ window.TEXTE = {
     <li><kbd>Tab</kbd> finds, <kbd>H</kbd> this sign, <kbd>M</kbd> sound on/off</li>
   </ul>
   <div style="margin-top:10px">Real words in the gibberish are marked in yellow. Your longest find is your record.</div>
-  <div style="margin-top:14px;font-size:14px;opacity:.75">This game is based on the novella <i>A Short Stay in Hell</i> by Steven L. Peck. It is meant as a simulator of the hell described there: the same library, at its full size.</div>
   <button id="los">Enter</button> <button id="sprache" style="background:#2a231b;color:#e8dfcf;border:1px solid #5b4a33">Deutsch</button>`,
     buchhilfe: '← → turn pages · PgUp/PgDn ±10 · Home/End · G throw into the shaft · E put back',
     kiosktitel: 'Kiosk', kioskfrage: 'What would you like to eat or drink?', kioskhilfe: 'Enter confirms, Esc cancels.',
@@ -45,6 +45,7 @@ window.TEXTE = {
   de: {
     titel: 'Hell Simulator', punkt: '.',
     tafel: `<h1>Willkommen in der Hölle</h1>
+  <div style="margin:-4px 0 14px;padding:8px 12px;font-size:14px;line-height:1.45;border-left:3px solid #c9a45c;background:#1f1a14">Ein inoffizielles, nicht kommerzielles Fanprojekt, inspiriert von der Novelle <i>A Short Stay in Hell</i> von Steven L. Peck. Es versucht, die dort beschriebene Hölle zu simulieren: dieselbe Bibliothek, in voller Größe. Es besteht keine Verbindung zum Autor oder zum Verlag und keine Billigung durch sie. Das Spiel enthält keinen Text aus dem Buch; alle Rechte an der Novelle liegen bei ihren Inhabern.</div>
   <div>Dies ist die Bibliothek. Sie enthält jedes Buch, das sich auf 410 Seiten mit je 40 Zeilen zu 80 Zeichen schreiben lässt. Eines davon erzählt dein Leben.</div>
   <h2>Die Regeln</h2>
   <ol>
@@ -61,7 +62,6 @@ window.TEXTE = {
     <li><kbd>Tab</kbd> Fundstücke, <kbd>H</kbd> diese Tafel, <kbd>M</kbd> Ton an/aus</li>
   </ul>
   <div style="margin-top:10px">Echte Wörter im Zeichensalat werden gelb markiert. Dein längster Fund ist dein Rekord.</div>
-  <div style="margin-top:14px;font-size:14px;opacity:.75">Dieses Spiel basiert auf der Novelle <i>A Short Stay in Hell</i> von Steven L. Peck. Es soll ein Simulator der dort beschriebenen Hölle sein: dieselbe Bibliothek, in voller Größe.</div>
   <button id="los">Eintreten</button> <button id="sprache" style="background:#2a231b;color:#e8dfcf;border:1px solid #5b4a33">English</button>`,
     buchhilfe: '← → blättern · Bild↑/↓ ±10 · Pos1/Ende · G in den Schacht werfen · E zurückstellen',
     kiosktitel: 'Kiosk', kioskfrage: 'Was möchtest du essen oder trinken?', kioskhilfe: 'Eingabe bestätigt, Esc bricht ab.',
