@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hell Simulator – the library from “A Short Stay in Hell”</title>
+<meta name="description" content="Hell Simulator is a free 3D browser game that simulates the hell from Steven L. Peck's novella A Short Stay in Hell: an unimaginably vast library holding every possible 410-page book. Walk the shelves, pull any book, read the gibberish and hunt for real words.">
+<meta property="og:title" content="Hell Simulator">
+<meta property="og:description" content="Walk the endless library from “A Short Stay in Hell”. Every possible 410-page book is on the shelves. One of them tells your life.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wolfulf.github.io/hell-simulator/">
+<link rel="canonical" href="https://wolfulf.github.io/hell-simulator/">
+<style>
+  html, body { margin: 0; height: 100%; background: #000; color: #e8dfcf; overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif; }
+  canvas { display: block; }
+  #hud { position: fixed; left: 14px; top: 12px; font-size: 14px; line-height: 1.5;
+    text-shadow: 0 1px 3px #000; pointer-events: none; white-space: pre; }
+  #stat { position: fixed; left: 14px; bottom: 12px; font-size: 13px; line-height: 1.5;
+    text-shadow: 0 1px 3px #000; pointer-events: none; white-space: pre; opacity: .85; }
+  #kreuz { position: fixed; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px;
+    border-radius: 50%; background: rgba(255,255,255,.7); pointer-events: none; }
+  #hinweis { position: fixed; left: 0; right: 0; bottom: 18%; text-align: center; font-size: 16px;
+    text-shadow: 0 1px 4px #000; pointer-events: none; }
+  #meldung { position: fixed; left: 0; right: 0; top: 16%; text-align: center; font-size: 19px;
+    text-shadow: 0 1px 6px #000; pointer-events: none; transition: opacity .6s; opacity: 0;
+    padding: 0 10%; }
+  .ebene { position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+    background: rgba(0,0,0,.72); }
+  .ebene.an { display: flex; }
+  #buch .blatt { background: #efe6d2; color: #1d1a16; padding: 2.2vh 2.4vw 1.4vh; border-radius: 3px;
+    box-shadow: 0 10px 60px #000; }
+  #seite { margin: 0; font: min(1.62vh, 1.72vw)/1.16 Menlo, Consolas, "Courier New", monospace;
+    white-space: pre; }
+  #seite mark { background: #e2b33c; color: #000; border-radius: 2px; }
+  #buchkopf, #buchfuss { font-size: min(1.7vh, 15px); display: flex; justify-content: space-between;
+    gap: 2em; color: #5b5142; }
+  #buchkopf { margin-bottom: 1vh; } #buchfuss { margin-top: 1vh; }
+  .karte { max-width: 640px; background: #17130f; border: 1px solid #5b4a33; padding: 26px 34px;
+    border-radius: 4px; font-size: 16px; line-height: 1.55; max-height: 84vh; overflow: auto; }
+  .karte h1 { font-size: 24px; margin: 0 0 12px; font-weight: normal; letter-spacing: .04em; }
+  .karte h2 { font-size: 16px; margin: 18px 0 6px; color: #c9a45c; font-weight: normal; }
+  .karte ol, .karte ul { margin: 6px 0; padding-left: 22px; }
+  .karte kbd { font: 13px Menlo, monospace; background: #2a231b; border: 1px solid #5b4a33;
+    border-radius: 3px; padding: 0 5px; }
+  .karte button { margin-top: 18px; font: inherit; padding: 8px 22px; background: #c9a45c; color: #17130f;
+    border: 0; border-radius: 3px; cursor: pointer; }
+  .karte input { font: inherit; width: 100%; box-sizing: border-box; padding: 8px 10px; margin-top: 10px;
+    background: #0e0b08; color: #e8dfcf; border: 1px solid #5b4a33; border-radius: 3px; }
+  #funde table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  #funde td { padding: 3px 10px 3px 0; border-bottom: 1px solid #2a231b; vertical-align: top; }
+  #funde td:first-child { font-family: Menlo, monospace; color: #e2b33c; }
+  #schwarz { position: fixed; inset: 0; background: #000; opacity: 0; pointer-events: none;
+    transition: opacity 1.2s; }
+</style>
+</head>
+<body>
+<noscript><div style="max-width:640px;margin:10vh auto;padding:0 16px;line-height:1.5">
+<h1>Hell Simulator</h1>
+<p>A 3D browser game that simulates the hell from Steven L. Peck's novella <i>A Short Stay in Hell</i>: a library holding every book that can be written on 410 pages of 40 lines with 80 characters each. This game needs JavaScript.</p>
+</div></noscript>
+<div id="hud"></div>
+<div id="stat"></div>
+<div id="kreuz"></div>
+<div id="hinweis"></div>
+<div id="schwarz"></div>
+<div id="meldung"></div>
+
+<div id="buch" class="ebene"><div class="blatt">
+  <div id="buchkopf"><span id="buchort"></span><span id="buchseite"></span></div>
+  <pre id="seite"></pre>
+  <div id="buchfuss"><span id="buchhilfe"></span><span id="buchfund"></span></div>
+</div></div>
+
+<div id="kiosk" class="ebene"><div class="karte">
+  <h1 id="kiosktitel"></h1>
+  <div id="kioskfrage"></div>
+  <input id="kioskfeld" maxlength="80" autocomplete="off">
+  <div id="kioskhilfe" style="margin-top:10px;font-size:13px;opacity:.7"></div>
+</div></div>
+
+<div id="funde" class="ebene"><div class="karte">
+  <h1 id="fundetitel"></h1>
+  <div id="fundliste"></div>
+  <button id="fundezu"></button>
+</div></div>
+
+<div id="start" class="ebene an"><div class="karte" id="tafel"></div></div>
+
+<script src="vendor/three.min.js"></script>
+<script src="woerter.js"></script>
+<script src="texte.js"></script>
+<script src="ton.js"></script>
+<script src="spiel.js"></script>
+</body>
+</html>
